@@ -1,15 +1,16 @@
 code
   -webkit-font-smoothing: auto
   -moz-osx-font-smoothing: auto
-  color: var(--text-code)
   font-family: $ff-code
-  word-break: break-all
+
+p>code:not([class]),li>code:not([class])
   font-size: 85%
   background: var(--block)
-  padding: .2em .4em
+  padding: .2em
   border-radius: 4px
+  color: var(--text-code)
 
-article.md .highlight
+article.md .highlight, pre:not([class]):has(>code)
   margin: var(--gap-p) 0
   border-radius: $border-block
   overflow: hidden
@@ -19,7 +20,7 @@ article.md .highlight
   font-family: $ff-code
   box-sizing: border-box
   @media screen and (min-width: $device-mobile)
-    min-width: 280px
+    min-width: 180px
 
 article.md .highlight
   position: relative
@@ -74,9 +75,36 @@ article.md .highlight
   .gutter+.code pre
     padding-left: 0.25em
 
+article.md .gist 
+  .gist-file 
+    border: 1px solid var(--block-border)
+    border-radius: $border-block
+  .gist-data
+    border-bottom: 1px solid var(--block-border)
+  .highlight
+    display: inherit
+    border: none
+    border-radius: 0
+    background: none
+    margin: 0
+    padding: 1em 0
+  .gist-meta
+    background: var(--block-border)
+
 
 table:not([class])
   border-collapse: collapse
+
+
+article.md pre
+  >.caption
+    color: var(--text-p3)
+  >.hljs
+    padding: 1rem
+    border-radius: $border-block
+    border: 1px solid var(--block-border)
+    line-height: 1.5
+    box-sizing: border-box
 
 article.md .highlight
   .code
@@ -133,7 +161,7 @@ article.md .highlight
     content: "Python"
   &.php .code:before
     content: "PHP"
-  &.rust .code:before
+  &.rust .code:before,&.rs .code:before
     content: "Rust"
   &.sql .code:before
     content: "SQL"
@@ -143,8 +171,8 @@ article.md .highlight
     content: "Makefile"
   &.go .code:before
     content: "Go"
-  &.typescript .code:before
-    content: "TypeScript"
+  &.typescript .code:before,&.ts .code:before
+    content: "TS"
 
 
 
@@ -157,7 +185,7 @@ $hl-red = #EE2B29
 $hl-orange = #FB3F1B
 $hl-amber = #FD8607
 $hl-text = var(--text-p1)
-pre
+.code>pre
   .code:before
     display: none
   // 行
